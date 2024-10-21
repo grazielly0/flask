@@ -1,0 +1,33 @@
+    {% extends 'base.html' %}
+{% block conteudo %}
+  <div class="listar-individual">
+    <h2>Buscar Cadastro</h2>
+
+    <form action="/listarIndividual" method="POST">
+      <label>CPF:</label><input class="bot" type="text" name="cpf" id="cpfcamp" required/><br><br>
+      <button type="submit" class="btn btn-outline-primary">Buscar</button>
+    </form>
+
+    {% if usuarios %}
+      <div class="usuario-info">
+        <h3>Informações dos usuários encontrados:</h3>
+        {% for usuario in usuarios %}
+          <div class="usuario">
+            <p><strong>CPF:</strong> {{ usuario.cpf }}</p>
+            <p><strong>Nome:</strong> {{ usuario.nome }}</p>
+            <p><strong>Telefone:</strong> {{ usuario.telefone }}</p>
+            <p><strong>Endereço:</strong> {{ usuario.endereco }}</p>
+            <p><strong>Forma de Pagamento:</strong> {{ usuario.pagamento }}</p>
+            <hr>
+          </div>
+        {% endfor %}
+      </div>
+    {% elif erro %}
+      <div class="alert alert-danger" role="alert">
+        {{ erro }}
+      </div>
+    {% endif %}
+
+      <a href="/index"><button class="btn btn-outline-primary">Voltar</button></a>
+  </div>
+{% endblock %}
